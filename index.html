@@ -44,6 +44,8 @@
 <body>
     <h2>Mortgage Refinance Enquiry Form</h2>
     <form name="mortgage-refinance" method="POST" netlify>
+        <input id="leadid_token" name="universal_leadid" type="hidden" value=""/>
+        <input type="hidden" name="ipv4" id="ipv4-field" />
         <label for="name">Full Name:</label>
         <input type="text" id="name" name="name" required>
         
@@ -58,8 +60,43 @@
         
         <label for="message">Message:</label>
         <textarea id="message" name="message" rows="4" required></textarea>
+
+        <label class="checkbox-label">
+											<input type="checkbox" name="privacy_consent" id="leadid_tcpa_disclosure" required>
+											<span>I agree to the <a class='privacy-link' href='#'>privacy policy</a> I consent to being contacted regarding my mortgage refinance enquiry.</span>
+										</label>
         
         <button type="submit">Submit Enquiry</button>
     </form>
+
+    <script>
+	$(document).ready(function () {
+	  // Fetch and set the IPv4 address using the ipify API
+	  $.getJSON('https://api.ipify.org?format=json', function(data) {
+		$('#ipv4-field').val(data.ip);
+	  });
+  
+	  // Toggle 'Read more' text
+	  $(".read").click(function () {
+		$(this).siblings(".more").toggle();
+		$(this).text(function (i, text) {
+		  return text === "Read more" ? "Read less" : "Read more";
+		});
+	  });
+	});
+  </script>
+    
+    <script id="LeadiDscript" type="text/javascript">
+(function() {
+var s = document.createElement('script');
+s.id = 'LeadiDscript_campaign';
+s.type = 'text/javascript';
+s.async = true;
+s.src = '//create.lidstatic.com/campaign/c44b2b5b-f1a0-194f-9250-bda390423382.js?snippet_version=2';
+var LeadiDscript = document.getElementById('LeadiDscript');
+LeadiDscript.parentNode.insertBefore(s, LeadiDscript);
+})();
+</script>
+<noscript><img src='//create.leadid.com/noscript.gif?lac=611B57D4-297F-F65F-7E3C-BB0ED7A4A296&lck=c44b2b5b-f1a0-194f-9250-bda390423382&snippet_version=2' /></noscript>
 </body>
 </html>
