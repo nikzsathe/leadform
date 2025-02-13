@@ -1,130 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lead Form</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    form {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #f9f9f9;
-    }
-    label {
-      display: block;
-      margin-bottom: 10px;
-    }
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"] {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    input[type="checkbox"] {
-      margin-right: 10px;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Refinance Enquiry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
-  <h1>Lead Form</h1>
-  <form id="leadForm">
-    <label>
-      First Name:
-      <input type="text" name="firstName" required />
-    </label>
-    <label>
-      Last Name:
-      <input type="text" name="lastName" required />
-    </label>
-    <label>
-      Address:
-      <input type="text" name="address" required />
-    </label>
-    <label>
-      Email:
-      <input type="email" name="email" required />
-    </label>
-    <label>
-      Phone:
-      <input type="tel" name="phone" required />
-    </label>
-    <!-- Jornaya LeadID Hidden Input -->
-    <input id="leadid_token" name="universal_leadid" type="hidden" value="" />
-    <!-- TCPA Disclosure Checkbox -->
-    <label>
-      <input type="checkbox" id="leadid_tcpa_disclosure" name="tcpaConsent" required />
-      i accept
-    </label>
-    <button type="submit">Submit</button>
-  </form>
-
-  <!-- Jornaya LeadID Script -->
-  <script id="LeadiDscript" type="text/javascript">
-    (function() {
-      var s = document.createElement('script');
-      s.id = 'LeadiDscript_campaign';
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = '//create.lidstatic.com/campaign/c44b2b5b-f1a0-194f-9250-bda390423382.js?snippet_version=2';
-      var LeadiDscript = document.getElementById('LeadiDscript');
-      LeadiDscript.parentNode.insertBefore(s, LeadiDscript);
-    })();
-  </script>
-  <noscript>
-    <img src='//create.leadid.com/noscript.gif?lac=611B57D4-297F-F65F-7E3C-BB0ED7A4A296&lck=c44b2b5b-f1a0-194f-9250-bda390423382&snippet_version=2' />
-  </noscript>
-
-  <!-- JavaScript to Handle Form Submission -->
-  <script>
-    document.getElementById('leadForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const formData = {
-        firstName: e.target.firstName.value,
-        lastName: e.target.lastName.value,
-        address: e.target.address.value,
-        email: e.target.email.value,
-        phone: e.target.phone.value,
-        universal_leadid: e.target.universal_leadid.value,
-        tcpaConsent: e.target.tcpaConsent.checked,
-      };
-
-      try {
-        const response = await fetch('http://localhost:5000/submit', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-        const result = await response.json();
-        alert(result.message);
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('An error occurred. Please try again.');
-      }
-    });
-  </script>
+    <h2>Mortgage Refinance Enquiry Form</h2>
+    <form name="mortgage-refinance" method="POST" data-netlify="true">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        
+        <button type="submit">Submit Enquiry</button>
+    </form>
 </body>
 </html>
